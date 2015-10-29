@@ -1,0 +1,24 @@
+//
+//  QLCategory.pch
+//  Demo_QLCategory
+//
+//  Created by Shrek on 28/02/2015.
+//  Copyright (c) 2015 Shrek. All rights reserved.
+//
+
+#ifndef Demo_QLCategory_QLCategory_pch
+#define Demo_QLCategory_QLCategory_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+/** QLDEBUG Print | M:method, L:line, C:content*/
+#ifndef QLLog
+#ifdef DEBUG
+#define QLLog(FORMAT, ...) fprintf(stderr,"M:%s|L:%d|C->%s\n", __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#else
+#define QLLog(FORMAT, ...)
+#endif
+#endif
+
+#endif
