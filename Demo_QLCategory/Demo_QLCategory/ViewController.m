@@ -11,6 +11,7 @@
 #import "UIImage+QLImage.h"
 #import "UIDevice+QLDevice.h"
 #import "NSDate+QLDate.h"
+#import "NSString+QLString.h"
 
 // 调试打印
 /** QLDEBUG Print | M:method, L:line, C:content*/
@@ -31,14 +32,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:QLColorWithRGB(200, 200, 200)];
+    [self.view setBackgroundColor:QLColorWithRGB(250, 100, 200)];
     
-    [self testForDate];
+    //[self testForDate];
     
     //[self testForQLColor];
     //[self testForTransparentBorder];
     
     //[UIDevice hasJailbroken];
+    
+    [self testForString];
+}
+
+- (void)testForString {
+    NSString *strPrice = @"44523.25";
+    strPrice = [NSString formattedPriceFromString:strPrice];
+    QLLog(@"%@", strPrice);
 }
 
 - (void)testForDate {
@@ -78,9 +87,10 @@
     [self.view addSubview:label];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    UIColor *color = [UIColor colorFromPoint:[[touches anyObject] locationInView:self.view] InView:self.view];
+    NSString *strHex = [UIColor hexFromUIColor:color];
+    QLLog(@"%@", strHex);
 }
 
 @end

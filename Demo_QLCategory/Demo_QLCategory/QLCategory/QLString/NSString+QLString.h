@@ -89,6 +89,15 @@
  */
 - (BOOL)isChineseString;
 
+/**
+ *  @brief  金额转成特定格式（11,111,111.00）
+ *
+ *  @param priceValue 价格字符串
+ *
+ *  @return 返回生成的固定格式的字符串
+ */
++ (NSString *)formattedPriceFromString:(NSString *)priceValue;
+
 #pragma mark - Json
 + (NSData *)jsonDataWithNSDictionary:(NSDictionary *)dict;
 + (id)jsonObjectWithData:(NSData *)data;

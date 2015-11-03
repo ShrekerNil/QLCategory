@@ -106,6 +106,44 @@
 }
 
 /**
+ *  @brief  金额转成特定格式（11,111,111.00）
+ *
+ *  @param priceValue 价格字符串
+ *
+ *  @return 返回生成的固定格式的字符串
+ */
++ (NSString *)formattedPriceFromString:(NSString *)priceValue {
+    NSString *suffixStr = @"";
+    if ([priceValue containsString:@"."]) {
+        NSString *preStr=[priceValue componentsSeparatedByString:@"."][0];
+        if (preStr.length <= 3) {
+            return priceValue;
+        }
+        suffixStr=[NSString stringWithFormat:@".%@",[priceValue componentsSeparatedByString:@"."][1]];
+        priceValue=preStr;
+    } else {
+        if (priceValue.length<=3) {
+            return priceValue;
+        }
+    }
+    
+    NSString    *tempStr=@"";
+    int j = 0;
+    for (NSUInteger i = priceValue.length; i > 0; i --) {
+        NSString *str1=[priceValue substringWithRange:NSMakeRange(i-1, 1)];
+        if (j == 3) {
+            j = 0;
+            tempStr = [NSString stringWithFormat:@"%@,%@",str1, tempStr];
+        }else{
+            tempStr = [NSString stringWithFormat:@"%@%@",str1, tempStr];
+        }
+        j ++;        
+    }
+    QLLog(@"te===%@",[tempStr stringByAppendingString:suffixStr]);
+    return [tempStr stringByAppendingString:suffixStr];
+}
+
+/**
  *  @brief  获得一个非nil/NSNull的值
  *
  *  @param obj 元数据
