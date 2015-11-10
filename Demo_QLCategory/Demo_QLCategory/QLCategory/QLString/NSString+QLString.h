@@ -56,7 +56,7 @@
  *
  *  @return 返回元数据对应的字符串,当元数据为nil/NSNull的时候返回@""
  */
-+ (NSString *)getValidStringWithObject:(id)obj;
++ (NSString *)validStringWithObject:(id)obj;
 
 /**
  *  @brief  判断字符串对象是否为一个nil/NSNull/@""
@@ -92,11 +92,11 @@
 /**
  *  @brief  金额转成特定格式（11,111,111.00）
  *
- *  @param priceValue 价格字符串
+ *  @param number 数字字符串
  *
  *  @return 返回生成的固定格式的字符串
  */
-+ (NSString *)formattedPriceFromString:(NSString *)priceValue;
++ (NSString *)formattedPriceFromString:(NSNumber *)number;
 
 #pragma mark - Json
 + (NSData *)jsonDataWithNSDictionary:(NSDictionary *)dict;

@@ -45,8 +45,8 @@
 }
 
 - (void)testForString {
-    NSString *strPrice = @"44523.25";
-    strPrice = [NSString formattedPriceFromString:strPrice];
+    NSString *strPrice = @"44523.2456735";
+    strPrice = [NSString formattedPriceFromString:[NSNumber numberWithDouble:strPrice.doubleValue]];
     QLLog(@"%@", strPrice);
 }
 

@@ -112,7 +112,8 @@
  *
  *  @return 返回生成的固定格式的字符串
  */
-+ (NSString *)formattedPriceFromString:(NSString *)priceValue {
++ (NSString *)formattedPriceFromString:(NSNumber *)number {
+    NSString *priceValue = [NSString stringWithFormat:@"%@", number];
     NSString *suffixStr = @"";
     if ([priceValue containsString:@"."]) {
         NSString *preStr=[priceValue componentsSeparatedByString:@"."][0];
@@ -127,7 +128,7 @@
         }
     }
     
-    NSString    *tempStr=@"";
+    NSString *tempStr=@"";
     int j = 0;
     for (NSUInteger i = priceValue.length; i > 0; i --) {
         NSString *str1=[priceValue substringWithRange:NSMakeRange(i-1, 1)];
@@ -141,6 +142,12 @@
     }
     QLLog(@"te===%@",[tempStr stringByAppendingString:suffixStr]);
     return [tempStr stringByAppendingString:suffixStr];
+    /**
+    NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+    [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    NSString *strPriceNumber = [numberFormatter stringFromNumber: number];
+    return strPriceNumber; */
 }
 
 /**
@@ -150,10 +157,10 @@
  *
  *  @return 返回元数据对应的字符串,当元数据为nil/NSNull的时候返回@""
  */
-+ (NSString *)getValidStringWithObject:(id)obj {
++ (NSString *)validStringWithObject:(id)obj {
     /**
-     *  nil->(null)
-     *  NSNull-><null>
+     *  nil -> (null)
+     *  NSNull -> <null>
      */
     if ([obj isKindOfClass:[NSString class]]) {
         NSString *strValue = obj;
